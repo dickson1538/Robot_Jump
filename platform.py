@@ -15,4 +15,4 @@ class Platform(Sprite):
         self.rect.center = self.settings.screen_rect.center
 
     def update(self):
-        self.settings.screen.blit(self.image, self.rect)
+        self.settings.screen.blit(self.image, (100,400))

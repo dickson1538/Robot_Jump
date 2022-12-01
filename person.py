@@ -19,7 +19,7 @@ class Person(Sprite):
         self.left_2 = pygame.transform.scale(pygame.image.load("assets/robot_left_2.png"), (60, 80))
         self.jump = pygame.transform.scale(pygame.image.load("assets/character_robot_jump.png"), (60, 80))
 
-        # counts how many times it goes through the loop
+        # counts how many times it goes through the loop when
         self.index = 0
         self.counter = 0
         self.run_right = [self.right_0, self.right_1, self.right_2]
@@ -36,14 +36,13 @@ class Person(Sprite):
         self.y_gravity = .6
         self.jumping_height = 20
         self.y_velo = self.jumping_height
-        self.x, self.y = self.settings.screen_W, self.settings.screen_H
-        self.robot_rect = self.jump.get_rect()
+
+        self.jump_rec = self.stand.get_rect()
+        self.x, self.y = self.jump_rec.x , self.jump_rec.y
 
         self.screen = pygame.display.set_mode((self.settings.screen_W, self.settings.screen_H))
         self.screen_rect = self.screen.get_rect()
         self.rect.midbottom = self.screen_rect.midbottom
-        print(self.rect.midbottom)
-        self.userInput = pygame.key.get_pressed()
 
     def moving_robot(self):
         if self.moving_right and self.rect.right < self.screen_rect.right:
@@ -86,22 +85,26 @@ class Person(Sprite):
         self.moving_robot()
 
         self.counter += 1
+
         if self.counter > self.settings.run_cooldown:
             self.counter = 0
+
             if self.moving_right:
+
                 self.index += 1
                 if self.index >= len(self.run_right):
                     self.index = 0
                 self.image = self.run_right[self.index]
 
             if self.moving_left:
+
                 self.index += 1
                 if self.index >= len(self.run_left):
                     self.index = 0
                 self.image = self.run_left[self.index]
 
         if self.jumping:
-            self.robot_rect = self.jump.get_rect()
-            self.screen.blit(self.image, self.robot_rect)
+            self.image = self.jump
+            self.screen.blit(self.image, self.jump_rec)
         else:
             self.screen.blit(self.image, self.rect)

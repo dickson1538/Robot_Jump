@@ -15,7 +15,7 @@ class JumpGame:
         self.bird = Bird()
 
         self.game_objects = pygame.sprite.Group()
-        self.game_objects.add(self.person,self.bird, self.platform)
+        self.game_objects.add(self.person, self.bird, self.platform)
 
     def run_game(self):
         clock = pygame.time.Clock()
@@ -32,3 +32,4 @@ class JumpGame:
 
         self.game_objects.update()
         pygame.display.flip()
+
