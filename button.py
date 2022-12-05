@@ -17,12 +17,14 @@ class Button():
             screen.blit(self.image, self.rect)
             screen.blit(self.text, self.text_rect)
 
-    def checkForInput(self, position):
+    # this function checks to see if the mouse click is in the button
+    def check_for_input(self, position):
         if position[0] in range(self.rect.left, self.rect.right) and position[1] in range(self.rect.top,
                                                                                           self.rect.bottom):
             return True
         return False
 
+    # same logic as above but if hovering over the button the text changes color
     def change_color(self, position):
         if position[0] in range(self.rect.left, self.rect.right) and position[1] in range(self.rect.top,
                                                                                           self.rect.bottom):

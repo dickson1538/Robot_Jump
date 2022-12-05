@@ -7,6 +7,7 @@ from bird import Bird
 from tucan import Tucan
 from gametext import Gametext
 
+
 class JumpGame:
 
     def __init__(self):
@@ -17,15 +18,12 @@ class JumpGame:
         self.tucan = Tucan()
         self.gametext = Gametext()
 
-
         self.tucans = pygame.sprite.Group()
         self.tucans.add(self.tucan)
         self.game_objects = pygame.sprite.Group()
-        self.game_objects.add(self.bird, self.person, self.platform)
+        self.game_objects.add(self.bird, self.person, self.platform, self.tucan)
 
-        self.collision = pygame.sprite.collide_rect(self.bird, self.person)
         self.timer = 0
-
 
     def run_game(self):
         clock = pygame.time.Clock()
@@ -47,37 +45,36 @@ class JumpGame:
         pygame.display.flip()
 
     def collisions(self):
-        owl_bird_collision = pygame.sprite.collide_rect(self.bird, self.person)
+        owl_collision = pygame.sprite.collide_rect(self.bird, self.person)
+        #collision_tucans = pygame.sprite.spritecollide(self.person, self.tucans, True)
 
         platform_collision = pygame.sprite.collide_rect(self.platform, self.person)
 
-        if owl_bird_collision:
+
+        if owl_collision:
             self.settings.robot_health -= 2
             if self.settings.robot_health >= 0:
-                print("end_game")
                 print(self.settings.robot_health)
-                print("collision")
+
+        if pygame.sprite.spritecollide(self.person, self.tucans, True):
+            print("hit")
 
         if platform_collision:
-            print("stand")
-
+            print("Hit hit hit hit hit hit hit hit hit hit hit")
 
     def time(self):
         font = pygame.font.SysFont('Arial', 20)
-        game_time_text = font.render(f"TIME SURVIVED: {self.timer//60}", True, (200,200,200))
+        game_time_text = font.render(f"TIME SURVIVED: {self.timer // 60}", True, (200, 200, 200))
         game_time_text_rec = game_time_text.get_rect(
             center=(100, 30))
         self.settings.screen.blit(game_time_text, game_time_text_rec)
 
     def tucan_army(self):
-
-        tucan_count = 1
-        if tucan_count <= self.settings.number_of_tucans:
-            self.new_tucan = Tucan()
-            self.tucans.add(self.new_tucan)
-            self.game_objects.add(self.new_tucan)
-            tucan_count += 1
-        if tucan_count >= self.settings.number_of_tucans:
-            self.game_objects.remove(self.tucan)
-            tucan_count -= 1
-
+        number_t = 5
+        i = 0
+        if i <= number_t:
+            new_tucan = Tucan()
+            self.tucans.add(new_tucan)
+            self.game_objects.add(new_tucan)
+            i+=1
+        print(i)

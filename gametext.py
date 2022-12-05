@@ -5,7 +5,6 @@ from button import Button
 from person import Person
 
 
-
 class Gametext:
 
     def __init__(self):
@@ -13,6 +12,8 @@ class Gametext:
         pygame.init()
         self.settings = Settings()
         self.person = Person()
+
+
 
 
         self.play_button = pygame.image.load("assets/Play Rect.png")
@@ -60,9 +61,9 @@ class Gametext:
                     pygame.quit()
                     sys.exit()
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    if play_button.checkForInput(menu_mouse_postion):
+                    if play_button.check_for_input(menu_mouse_postion):
                         print("not working yet")
-                    if quit_button.checkForInput(menu_mouse_postion):
+                    if quit_button.check_for_input(menu_mouse_postion):
                         pygame.quit()
                         sys.exit()
 
@@ -79,7 +80,7 @@ class Gametext:
                     pygame.quit()
                     sys.exit()
 
-            self.jump_game.run_game()
+            # self.jump_game.run()
 
             pygame.display.update()
 

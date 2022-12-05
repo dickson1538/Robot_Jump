@@ -12,7 +12,6 @@ class Platform(Sprite):
         self.image = pygame.transform.scale(pygame.image.load("assets/platform.png"), (150, 50))
         self.rect = self.image.get_rect()
 
-        self.rect.center = self.settings.screen_rect.center
 
     def update(self):
         self.settings.screen.blit(self.image, (100,400))

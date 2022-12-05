@@ -50,7 +50,7 @@ class Main:
         while True:
             self.settings.screen.blit(self.background, (0, 0))
 
-            menu_mouse_postion = pygame.mouse.get_pos()
+            menu_mouse_pos = pygame.mouse.get_pos()
 
             menu_text = self.get_font(39).render("ROBOT JUMP GAME", True, "#FDFF00")
             menu_rect = menu_text.get_rect(center=(300, 50))
@@ -66,7 +66,7 @@ class Main:
             self.settings.screen.blit(menu_text, menu_rect)
 
             for button in [play_button, quit_button]:
-                button.change_color(menu_mouse_postion)
+                button.change_color(menu_mouse_pos)
                 button.update(self.settings.screen)
 
             for event in pygame.event.get():
@@ -75,10 +75,10 @@ class Main:
                     sys.exit()
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    if play_button.checkForInput(menu_mouse_postion):
+                    if play_button.check_for_input(menu_mouse_pos):
                         self.play()
 
-                    if quit_button.checkForInput(menu_mouse_postion):
+                    if quit_button.check_for_input(menu_mouse_pos):
                         pygame.quit()
                         sys.exit()
 
@@ -89,12 +89,11 @@ class Main:
         while True:
             self.settings.screen.blit(self.background, (0, 0))
 
-            menu_mouse_postion = pygame.mouse.get_pos()
+            menu_mouse_pos = pygame.mouse.get_pos()
 
             self.person.check_events()
             game_over_text = self.get_font(50).render("GAME OVER", True, "#b68f40")
-            game_over_text_rec = game_over_text.get_rect(
-                center=(300, 30))
+            game_over_text_rec = game_over_text.get_rect(center=(300, 30))
 
             play_button = Button(image=self.play_button, pos=(300, 300),
                                  text_input="PLAY AGAIN", font=self.get_font(35), base_color="#b68f40",
@@ -107,7 +106,7 @@ class Main:
             self.settings.screen.blit(game_over_text, game_over_text_rec)
 
             for button in [play_button, quit_button]:
-                button.change_color(menu_mouse_postion)
+                button.change_color(menu_mouse_pos)
                 button.update(self.settings.screen)
 
             for event in pygame.event.get():
@@ -115,10 +114,10 @@ class Main:
                     pygame.quit()
                     sys.exit()
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    if play_button.checkForInput(menu_mouse_postion):
+                    if play_button.check_for_input(menu_mouse_pos):
                         self.play_again()
 
-                    if quit_button.checkForInput(menu_mouse_postion):
+                    if quit_button.check_for_input(menu_mouse_pos):
                         pygame.quit()
                         sys.exit()
 
