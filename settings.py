@@ -16,13 +16,18 @@ class Settings:
         self.robot_width = 90
         self.robot_speed = 3
         self.run_cooldown = 8
-        self.health = 30
+        self.robot_health = 100
 
         # owl settings
         self.owl_speed = 1
-        self.owl_direction = 1
 
-        # Platform settings
-        self.platform_color = (200, 0, 0)
+        # tucan settings
+        self.tucan_speed = 1
+        self.number_of_tucans = 8
+
+
+
+
+
 
 

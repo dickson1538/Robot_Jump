@@ -15,7 +15,8 @@ class Bird(Sprite):
         self.rect = self.image.get_rect()
 
         self.rect.x = self.rect.width
-        self.rect.y = random.randint(0,self.settings.screen_H)
+        #self.rect.y = random.randint(0,self.settings.screen_H)
+        self.rect.y = 550
         self.number_of_birds = 3
         self.x = float(self.rect.x)
         self.count = 0

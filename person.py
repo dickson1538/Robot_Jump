@@ -19,7 +19,7 @@ class Person(Sprite):
         self.left_2 = pygame.transform.scale(pygame.image.load("assets/robot_left_2.png"), (60, 80))
         self.jump = pygame.transform.scale(pygame.image.load("assets/character_robot_jump.png"), (60, 80))
 
-        # counts how many times it goes through the loop when
+        # counts how many times it goes through the loop
         self.index = 0
         self.counter = 0
         self.run_right = [self.right_0, self.right_1, self.right_2]
@@ -31,28 +31,28 @@ class Person(Sprite):
         self.moving_right = False
         self.moving_left = False
         self.jumping = False
+        self.paused = False
 
         # jumping
-        self.y_gravity = .6
-        self.jumping_height = 20
+        self.y_gravity = .4
+        self.jumping_height = 24
         self.y_velo = self.jumping_height
-
-        self.jump_rec = self.stand.get_rect()
-        self.x, self.y = self.jump_rec.x , self.jump_rec.y
 
         self.screen = pygame.display.set_mode((self.settings.screen_W, self.settings.screen_H))
         self.screen_rect = self.screen.get_rect()
         self.rect.midbottom = self.screen_rect.midbottom
+
+
 
     def moving_robot(self):
         if self.moving_right and self.rect.right < self.screen_rect.right:
             self.rect.x += self.settings.robot_speed
         if self.moving_left and self.rect.left > 0:
             self.rect.x -= self.settings.robot_speed
-        if self.jumping:
-            self.y -= self.y_velo
+        if self.jumping :
+            self.rect.y -= self.y_velo
             self.y_velo -= self.y_gravity
-            if self.y_velo < -self.jumping_height:
+            if self.y_velo < -self.jumping_height :
                 self.jumping = False
                 self.y_velo = self.jumping_height
 
@@ -69,6 +69,8 @@ class Person(Sprite):
                     self.moving_left = True
                 if event.key == pygame.K_SPACE:
                     self.jumping = True
+                if event.key == pygame.K_p:
+                    self.paused = not self.paused
 
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_RIGHT:
@@ -85,19 +87,15 @@ class Person(Sprite):
         self.moving_robot()
 
         self.counter += 1
-
         if self.counter > self.settings.run_cooldown:
             self.counter = 0
-
             if self.moving_right:
-
                 self.index += 1
                 if self.index >= len(self.run_right):
                     self.index = 0
                 self.image = self.run_right[self.index]
 
             if self.moving_left:
-
                 self.index += 1
                 if self.index >= len(self.run_left):
                     self.index = 0
@@ -105,6 +103,7 @@ class Person(Sprite):
 
         if self.jumping:
             self.image = self.jump
-            self.screen.blit(self.image, self.jump_rec)
+            self.screen.blit(self.image, self.rect)
         else:
             self.screen.blit(self.image, self.rect)
+
