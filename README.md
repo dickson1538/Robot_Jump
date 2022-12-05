@@ -1,2 +1,10 @@
-# Robot_Jump
-EW_200 game 
+# Robot Jump Game
+
+-------
+
+## Instructions
+* avoid the birds 
+
+
+## Credits
+* MIDN Alpha ; 
