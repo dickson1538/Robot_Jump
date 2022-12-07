@@ -28,7 +28,6 @@ class Main:
         mixer.music.play()
 
         self.PLAY = False
-        # self.PLAY_AGAIN = False
 
     def get_font(self, size):
         return pygame.font.Font("assets/font.ttf", size)
@@ -133,8 +132,8 @@ class Main:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-
-            self.jump_game.run_game()
+            if self.settings.robot_health <= 0:
+                self.jump_game.run_game()
 
             pygame.display.update()
 
