@@ -53,15 +53,15 @@ class Main:
 
             menu_mouse_pos = pygame.mouse.get_pos()
 
-            menu_text = self.get_font(39).render("ROBOT JUMP GAME", True, "#FDFF00")
+            menu_text = self.get_font(58).render("ROBOT JUMP GAME", True, "#FDFF00")
             menu_rect = menu_text.get_rect(center=(300, 50))
 
             play_button = Button(image=self.play_button, pos=(300, 300),
-                                 text_input="PLAY", font=self.get_font(40), base_color="#00FFFF",
+                                 text_input="PLAY", font=self.get_font(60), base_color="#00FFFF",
                                  hovering_color="White")
 
             quit_button = Button(image=pygame.image.load("assets/Quit Rect.png"), pos=(300, 500),
-                                 text_input="QUIT", font=self.get_font(40), base_color="#00FFFF",
+                                 text_input="QUIT", font=self.get_font(60), base_color="#00FFFF",
                                  hovering_color="White")
 
             self.settings.screen.blit(menu_text, menu_rect)

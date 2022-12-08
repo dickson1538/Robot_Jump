@@ -13,9 +13,8 @@ class Button():
         self.text_rect = self.text.get_rect(center=(self.x_pos, self.y_pos))
 
     def update(self, screen):
-        if self.image is not None:
-            screen.blit(self.image, self.rect)
-            screen.blit(self.text, self.text_rect)
+        screen.blit(self.image, self.rect)
+        screen.blit(self.text, self.text_rect)
 
     # this function checks to see if the mouse click is in the button
     def check_for_input(self, position):

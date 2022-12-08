@@ -37,7 +37,7 @@ class Gametext:
             center=(300, 30))
 
         play_button = Button(image=self.play_button, pos=(300, 300),
-                             text_input="PLAY AGAIN", font=self.get_font(35), base_color="#b68f40",
+                             text_input="PLAY AGAIN button does not work", font=self.get_font(10), base_color="#b68f40",
                              hovering_color="White")
 
         quit_button = Button(image=pygame.image.load("assets/Quit Rect.png"), pos=(300, 500),

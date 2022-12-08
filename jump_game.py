@@ -13,6 +13,7 @@ from owl import Owl
 from duck import Duck
 from pygame import mixer
 from wall import Wall
+import pickle
 
 
 class JumpGame:
@@ -84,7 +85,8 @@ class JumpGame:
         moose_collision = pygame.sprite.collide_rect(self.moose, self.person)
         owl_collision = pygame.sprite.collide_rect(self.owl, self.person)
         wall_collision = pygame.sprite.collide_rect(self.wall, self.person)
-        tucan_wall = pygame.sprite.collide_rect(self.wall, self.tucan)
+        tucan_collision = pygame.sprite.collide_rect(self.person, self.tucan)
+        duck_collision = pygame.sprite.collide_rect(self.person, self.duck)
         # tucan_collision = pygame.sprite.spritecollide(self.person, self.tucans, False)
 
         if bear_collision:
@@ -99,8 +101,7 @@ class JumpGame:
 
         if owl_collision:
             self.settings.robot_health -= 2
-            if self.settings.robot_health >= 0:
-                print(self.settings.robot_health)
+
 
         if wall_collision:
             if self.person.moving_left:
@@ -108,8 +109,14 @@ class JumpGame:
             if self.person.moving_right:
                 self.person.rect.x = 100
 
-        if tucan_wall:
-            self.settings.tucan_speed= self.settings.tucan_speed * -1
+        if tucan_collision:
+            self.settings.robot_health -= 2
+
+
+
+        if duck_collision:
+            self.settings.robot_health -= 2
+
 
     def time(self):
         font = pygame.font.SysFont('Arial', 20)
@@ -134,6 +141,15 @@ class JumpGame:
         game_time_text_rec = game_time_text.get_rect(
             center=(300, 200))
         self.settings.screen.blit(game_time_text, game_time_text_rec)
+
+        score = self.timer // 60
+        scores = []
+        for score in scores:
+            scores.append(score)
+
+        with open('score.dat', 'wb') as file:
+            pickle.dump(scores, file)
+
 
     #################################################
     def playagain(self):
