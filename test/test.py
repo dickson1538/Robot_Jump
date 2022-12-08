@@ -1,88 +1,51 @@
 import pygame
+import random
 from settings import Settings
-
-class button:
-    def __init__(self, position, size,  func=None, text='', font="Segoe Print", font_size=16, font_clr=[0, 0, 0]):
-        self.clr    = clr
-        self.size   = size
-        self.func   = func
-        self.surf   = pygame.Surface(size)
-        self.rect   = self.surf.get_rect(center=position)
-
-        self.font = pygame.font.SysFont(font, font_size)
-        self.txt = text
-        self.font_clr = font_clr
-        self.txt_surf = self.font.render(self.txt, 1, self.font_clr)
-        self.txt_rect = self.txt_surf.get_rect(center=[wh//2 for wh in self.size])
+from pygame.sprite import Sprite
 
 
+class Tucan(Sprite):
 
-    def call_back(self, *args):
-        if self.func:
-            return self.func(*args)
+    def __init__(self):
+        super().__init__()
+        self.settings = Settings()
 
-class text:
-    def __init__(self, msg, position, clr=[100, 100, 100], font="Segoe Print", font_size=15, mid=False):
-        self.position = position
-        self.font = pygame.font.SysFont(font, font_size)
-        self.txt_surf = self.font.render(msg, 1, clr)
+        self.image = pygame.transform.scale(pygame.image.load("assets/parrot.png"), (20, 20))
 
-        if len(clr) == 4:
-            self.txt_surf.set_alpha(clr[3])
+        self.rect = self.image.get_rect()
+        self.rect.x = -20
+        self.rect.y = random.randint(0, self.settings.screen_H)
+        self.left = float(self.rect.x)
+        self.right = float(self.rect.x)
 
-        if mid:
-            self.position = self.txt_surf.get_rect(center=position)
+        self.Left = False
+        self.Right = False
 
+    def update(self):
+        count = 0
+        self.side()
 
-    def draw(self, screen):
-        screen.blit(self.txt_surf, self.position)
+        if self.Right:
+            self.right += self.settings.tucan_speed
+            self.rect.x = self.right
+            if self.rect.right > 620:
+                self.rect.x = -20
+                self.settings.screen.blit(self.image, self.rect)
+            self.settings.screen.blit(self.image, self.rect)
 
+        if self.Left:
+            self.left -= self.settings.tucan_speed
+            self.rect.x = self.left
+            if self.rect.left < 0:
+                self.rect.x = 600
+                self.settings.screen.blit(self.image, self.rect)
 
+            self.settings.screen.blit(self.image, self.rect)
+            count += 1
 
-
-# call back functions
-def fn1():
-    print('button1')
-def fn2():
-    print('button2')
-
-
-if __name__ == '__main__':
-    pygame.init()
-    screen_size = (300, 200)
-    size        = 10
-    clr         = [255, 0, 255]
-    bg          = (255, 255, 0)
-    font_size   = 15
-    font        = pygame.font.Font(None, font_size)
-    clock       = pygame.time.Clock()
-
-    screen    = pygame.display.set_mode(screen_size)
-    screen.fill(bg)
-
-    button1 = button((80, 100), size=(100, 50), clr=(220, 220, 220), cngclr=(255, 0, 0), func=fn1, text='button1')
-    button2 = button((220, 100), (100, 50), (220, 220, 220), (255, 0, 0), fn2, 'button2')
-
-    button_list = [button1, button2]
-
-    crash = True
-    while crash:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                crash = False
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    crash = False
-
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                if event.button == 1:
-                    pos = pygame.mouse.get_pos()
-                    for b in button_list:
-                        if b.rect.collidepoint(pos):
-                            b.call_back()
-
-        for b in button_list:
-            b.draw(screen)
-
-        pygame.display.update()
-        clock.tick(60)
+    def side(self):
+        left_right = random.randint(1, 2)
+        if left_right == 1:
+            self.Left = True
+        if left_right == 2:
+            self.Right = True

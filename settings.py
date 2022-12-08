@@ -18,13 +18,20 @@ class Settings:
         self.run_cooldown = 8
         self.robot_health = 100
 
+
+
+        #
+        self.bear_speed = 2
+        self.moose_speed = 1
         # owl settings
-        self.owl_speed = 1
+        self.owl_speed = 3
 
         # tucan settings
         self.tucan_speed = 1
         self.number_of_tucans = 8
 
+    def reset(self):
+        self.robot_health = 100
 
 
 

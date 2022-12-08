@@ -83,7 +83,7 @@ class Main:
 
             pygame.display.update()
 
-    # this is an idea to get the play again button to work
+#####################################################################################################################
     def play_again_menu(self):
         while True:
             self.settings.screen.blit(self.background, (0, 0))
