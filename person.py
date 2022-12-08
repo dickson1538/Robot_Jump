@@ -80,7 +80,7 @@ class Person(Sprite):
     def update(self):
         self.check_events()
         self.moving_robot()
-        self.healthbar()
+
 
         self.counter += 1
         if self.counter > self.settings.run_cooldown:
@@ -103,10 +103,3 @@ class Person(Sprite):
         else:
             self.screen.blit(self.image, self.rect)
 
-    def healthbar(self):
-        pygame.draw.rect(self.screen, (255, 0, 0),
-                       (self.rect.x, self.rect.y + self.image.get_height() - 80, self.image.get_width(), 10))
-        #pygame.draw.rect(self.screen, (0, 255, 0), (
-            #self.rect.x, self.rect.y + self.image.get_height() - 80,
-           # self.image.get_width() * (self.settings.robot_health / 100),
-            #10))

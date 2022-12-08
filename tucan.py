@@ -10,21 +10,22 @@ class Tucan(Sprite):
         super().__init__()
         self.settings = Settings()
 
-        self.image = pygame.transform.scale(pygame.image.load("assets/parrot.png"), (20, 20))
+        self.image = pygame.transform.scale(pygame.image.load("assets/parrot.png"), (30, 30))
 
         self.rect = self.image.get_rect()
 
-        self.rect.x = 620
-        self.rect.y = random.randint(400, 550)
+        self.rect.x = 600
+        self.rect.y = random.randint(300, 450)
+
         self.x = float(self.rect.x)
-        self.count = 0
 
     def update(self):
-        self.x -= self.settings.tucan_speed
         self.rect.x = self.x
+        self.x -= self.settings.tucan_speed
 
-        if self.rect.left < 0:
-            self.rect.x = 600
-            self.settings.screen.blit(self.image, self.rect)
+        if self.rect.left <= self.image.get_width()-60:
+            self.x = self.image.get_width()+self.settings.screen_W
+            self.rect.y = random.randint(300, 450)
 
+    def draw(self):
         self.settings.screen.blit(self.image, self.rect)

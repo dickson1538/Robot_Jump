@@ -3,8 +3,9 @@
 -------
 
 ## Instructions
-* avoid the birds 
+* Avoid all the animals and have fun 
 
 
-## Credits
-* MIDN Alpha ; 
+## Controls 
+* Arrow keys to move character 
+* Space Bar to jump 

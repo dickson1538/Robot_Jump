@@ -27,5 +27,5 @@ class Owl(Sprite):
         if self.rect.x > self.settings.screen_W - 50:
             self.settings.owl_speed = 3
 
-
+    def draw(self):
         self.settings.screen.blit(self.image, self.rect)

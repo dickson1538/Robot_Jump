@@ -27,11 +27,9 @@ class Settings:
         self.owl_speed = 3
 
         # tucan settings
-        self.tucan_speed = 1
+        self.tucan_speed = 4
         self.number_of_tucans = 8
 
-    def reset(self):
-        self.robot_health = 100
 
 
 
